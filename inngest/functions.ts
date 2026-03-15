@@ -14,7 +14,8 @@ export const helloWorld = inngest.createFunction(
 
 export const sendDailyNews = inngest.createFunction(
     { id: "send-daily-news" },
-    { event: "daily-news/send" },
+    // { event: "daily-news/send" },
+    {cron: "0 16 * * *"},
     async ({ event, step }) => {
       // 1. get news from rss feeds
 
