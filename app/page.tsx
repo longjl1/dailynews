@@ -5,6 +5,7 @@ import { Bot } from 'lucide-react';
 import Card from "@/components/card";
 
 import { useState } from 'react';
+import { toast } from "sonner"
 
 export default function Home() {
 
@@ -18,11 +19,14 @@ export default function Home() {
       method:'POST',
       body: JSON.stringify({email}),
     }).then(res => res.json()).then(data => {
-      if (data.error) { alert(data.error)}
-    } else{
-      alert('Subscribed successfully!')
+      if(data.error) {
+        toast.error(data.error)
+      } else {
+        toast.success('Subscribed successfully!')
+      }
     }).catch(err => {
-      alart('Subscription failed. Please try again later.')
+      toast.error('Subscription failed. Please try again later.')
+      console.error('Subscription error:', err);
     }).finally(() => {
       setEmail('');
     })

@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
     const { email } = await request.json();
@@ -13,7 +14,7 @@ export async function POST(request: Request) {
         }
     )
     if (createError) {
-        return Response.json({
+        return NextResponse.json({
             error:createError.message,
         }, { status: 500 })
     }
@@ -23,10 +24,10 @@ export async function POST(request: Request) {
         segmentId: 'aa3e1fe8-8af6-4fb9-b50c-4a5441b1cc79',
     }) 
     if (addError) {
-        return Response.json({
+        return NextResponse.json({
             error:addError.message,
         }, { status: 500 })
     }
 
-    return new Response('OK', { status: 200 });
+    return  NextResponse.json({ message: 'Subscribed successfully!' }, { status: 200 });
 }
